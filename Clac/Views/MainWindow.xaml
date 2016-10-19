@@ -1,0 +1,82 @@
+﻿<Window x:Class="Clac.Views.MainWindow"   
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+        xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
+        xmlns:v="clr-namespace:Clac.Views"
+        xmlns:vm="clr-namespace:Clac.ViewModels"                                  
+        Title="MainWindow" Height="300" Width="200">
+    
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="{x:Static SystemParameters.CaptionHeight}"
+                      ResizeBorderThickness="{x:Static SystemParameters.WindowResizeBorderThickness}" />
+    </WindowChrome.WindowChrome>
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+
+    <i:Interaction.Triggers>
+
+        <!--Viewに特別な要件が存在しない限りは、トリガーやアクションの自作にこだわらず積極的にコードビハインドを使いましょう -->
+        <!--Viewのコードビハインドは、基本的にView内で完結するロジックとViewModelからのイベントの受信(専用リスナを使用する)に限るとトラブルが少なくなります -->
+        <!--Livet1.1からはコードビハインドでViewModelのイベントを受信するためのWeakEventLisnterサポートが追加されています -->
+
+        <!--WindowのContentRenderedイベントのタイミングでViewModelのInitializeメソッドが呼ばれます-->
+        <i:EventTrigger EventName="ContentRendered">
+            <l:LivetCallMethodAction MethodTarget="{Binding}" MethodName="Initialize"/>
+        </i:EventTrigger>
+
+        <!--Windowが閉じたタイミングでViewModelのDisposeメソッドが呼ばれます-->
+        <i:EventTrigger EventName="Closed">
+            <l:DataContextDisposeAction/>
+        </i:EventTrigger>
+
+        <!--WindowのCloseキャンセル処理に対応する場合は、WindowCloseCancelBehaviorの使用を検討してください-->
+
+    </i:Interaction.Triggers>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Button x:Name="zero" Content="0" Grid.Row="5" Grid.Column="0" Height="Auto" Grid.ColumnSpan="2"  Style="{StaticResource MaterialDesignRaisedLightButton}"/>
+        <Button x:Name="dot" Content="." Grid.Row="5" Grid.Column="2" Height="Auto"  Style="{StaticResource MaterialDesignRaisedLightButton}"/>
+        <Button x:Name="one" Content="1" Grid.Row="4" Grid.Column="0" Height="Auto"  Style="{StaticResource MaterialDesignRaisedLightButton}"/>
+        <Button x:Name="two" Content="2" Grid.Row="4" Grid.Column="1" Height="Auto"  Style="{StaticResource MaterialDesignRaisedLightButton}"/>
+        <Button x:Name="three" Content="3" Grid.Row="4" Grid.Column="2" Height="Auto"  Style="{StaticResource MaterialDesignRaisedLightButton}"/>
+        <Button x:Name="four" Content="4" Grid.Row="3" Grid.Column="0" Height="Auto"  Style="{StaticResource MaterialDesignRaisedLightButton}"/>
+        <Button x:Name="five" Content="5" Grid.Row="3" Grid.Column="1" Height="Auto"  Style="{StaticResource MaterialDesignRaisedLightButton}"/>
+        <Button x:Name="six" Content="6" Grid.Row="3" Grid.Column="2" Height="Auto"  Style="{StaticResource MaterialDesignRaisedLightButton}"/>
+        <Button x:Name="seven" Content="7" Grid.Row="2" Grid.Column="0" Height="Auto"  Style="{StaticResource MaterialDesignRaisedLightButton}"/>
+        <Button x:Name="eight" Content="8" Grid.Row="2" Grid.Column="1" Height="Auto"  Style="{StaticResource MaterialDesignRaisedLightButton}"/>
+        <Button x:Name="nine" Content="9" Grid.Row="2" Grid.Column="2" Height="Auto"  Style="{StaticResource MaterialDesignRaisedLightButton}"/>
+        <Button x:Name="equal" Content="=" Grid.Row="4" Grid.Column="3" Height="Auto" Grid.RowSpan="2"  Style="{StaticResource MaterialDesignRaisedAccentButton}"/>
+        <Button x:Name="plus" Content="+" Grid.Row="2" Grid.Column="3" Height="Auto" Grid.RowSpan="2"  Style="{StaticResource MaterialDesignRaisedButton}"/>
+        <Button x:Name="minus" Content="-" Grid.Row="1" Grid.Column="3" Height="Auto"  Style="{StaticResource MaterialDesignRaisedButton}"/>
+        <Button x:Name="times" Content="*" Grid.Row="1" Grid.Column="2" Height="Auto"  Style="{StaticResource MaterialDesignRaisedButton}"/>
+        <Button x:Name="divide" Content="÷" Grid.Row="1" Grid.Column="1" Height="Auto"  Style="{StaticResource MaterialDesignRaisedButton}"/>
+        <Button x:Name="clear" Content="C" Grid.Row="1" Grid.Column="0" Height="Auto"  Style="{StaticResource MaterialDesignRaisedButton}"/>
+        <TextBox x:Name="loginText" materialDesign:HintAssist.FloatingScale="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.IsFloating="True" Background="White" Padding="6,0,0,2" Grid.Row="0" Grid.ColumnSpan="4" Grid.Column="0" Text="テキストボックス（消してみて！）" materialDesign:HintAssist.Hint="ここに計算式とか表示したい"/>
+
+    </Grid>
+
+</Window>
