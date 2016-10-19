@@ -72,7 +72,7 @@
         <Button x:Name="equal" Content="=" Grid.Row="4" Grid.Column="3" Height="Auto" Grid.RowSpan="2"  Style="{StaticResource MaterialDesignRaisedAccentButton}"/>
         <Button x:Name="plus" Content="+" Grid.Row="3" Grid.Column="3" Height="Auto" Grid.RowSpan="1"  Style="{StaticResource MaterialDesignRaisedButton}"/>
         <Button x:Name="minus" Content="-" Grid.Row="2" Grid.Column="3" Height="Auto"  Style="{StaticResource MaterialDesignRaisedButton}"/>
-        <Button x:Name="times" Content="*" Grid.Row="1" Grid.Column="3" Height="Auto"  Style="{StaticResource MaterialDesignRaisedButton}"/>
+        <Button x:Name="times" Content="×" Grid.Row="1" Grid.Column="3" Height="Auto"  Style="{StaticResource MaterialDesignRaisedButton}"/>
         <Button x:Name="divide" Content="÷" Grid.Row="1" Grid.Column="2" Height="Auto"  Style="{StaticResource MaterialDesignRaisedButton}"/>
         <Button x:Name="allClear" Content="AC" Grid.Row="1" Grid.Column="0" Height="Auto"  Style="{StaticResource MaterialDesignRaisedButton}"/>
         <Button x:Name="clear" Content="C" Grid.Row="1" Grid.Column="1" Height="Auto"  Style="{StaticResource MaterialDesignRaisedButton}"/>
