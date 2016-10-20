@@ -74,6 +74,7 @@ namespace Clac.ViewModels
             }
             catch (DivideByZeroException e)
             {
+                this.Model.AllClear();
                 Messenger.Raise(new Livet.Messaging.TransitionMessage("DivideByZero"));
             }
         }
