@@ -6,7 +6,7 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:Clac.Views"
         xmlns:vm="clr-namespace:Clac.ViewModels"
-        Title="WarningWindow" Height="600" Width="750">
+        Title="WarningWindow" WindowState="Maximized" Topmost="True">
 
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="{x:Static SystemParameters.CaptionHeight}"
