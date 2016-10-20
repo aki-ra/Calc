@@ -19,11 +19,14 @@
         <WindowChrome CaptionHeight="{x:Static SystemParameters.CaptionHeight}"
                       ResizeBorderThickness="{x:Static SystemParameters.WindowResizeBorderThickness}" />
     </WindowChrome.WindowChrome>
+    
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
-
     <i:Interaction.Triggers>
+        <l:InteractionMessageTrigger MessageKey="DivideByZero" Messenger="{Binding Messenger}">
+            <l:TransitionInteractionMessageAction WindowType="{x:Type v:WarningWindow}" Mode="Modal"/>
+        </l:InteractionMessageTrigger>
 
         <!--Viewに特別な要件が存在しない限りは、トリガーやアクションの自作にこだわらず積極的にコードビハインドを使いましょう -->
         <!--Viewのコードビハインドは、基本的にView内で完結するロジックとViewModelからのイベントの受信(専用リスナを使用する)に限るとトラブルが少なくなります -->
@@ -58,25 +61,25 @@
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Button x:Name="zero" Content="0" Grid.Row="5" Grid.Column="0" Height="Auto" Grid.ColumnSpan="2"  Style="{StaticResource MaterialDesignRaisedLightButton}"/>
-        <Button x:Name="dot" Content="." Grid.Row="5" Grid.Column="2" Height="Auto"  Style="{StaticResource MaterialDesignRaisedLightButton}"/>
-        <Button x:Name="one" Content="1" Grid.Row="4" Grid.Column="0" Height="Auto"  Style="{StaticResource MaterialDesignRaisedLightButton}"/>
-        <Button x:Name="two" Content="2" Grid.Row="4" Grid.Column="1" Height="Auto"  Style="{StaticResource MaterialDesignRaisedLightButton}"/>
-        <Button x:Name="three" Content="3" Grid.Row="4" Grid.Column="2" Height="Auto"  Style="{StaticResource MaterialDesignRaisedLightButton}"/>
-        <Button x:Name="four" Content="4" Grid.Row="3" Grid.Column="0" Height="Auto"  Style="{StaticResource MaterialDesignRaisedLightButton}"/>
-        <Button x:Name="five" Content="5" Grid.Row="3" Grid.Column="1" Height="Auto"  Style="{StaticResource MaterialDesignRaisedLightButton}"/>
-        <Button x:Name="six" Content="6" Grid.Row="3" Grid.Column="2" Height="Auto"  Style="{StaticResource MaterialDesignRaisedLightButton}"/>
-        <Button x:Name="seven" Content="7" Grid.Row="2" Grid.Column="0" Height="Auto"  Style="{StaticResource MaterialDesignRaisedLightButton}"/>
-        <Button x:Name="eight" Content="8" Grid.Row="2" Grid.Column="1" Height="Auto"  Style="{StaticResource MaterialDesignRaisedLightButton}"/>
-        <Button x:Name="nine" Content="9" Grid.Row="2" Grid.Column="2" Height="Auto"  Style="{StaticResource MaterialDesignRaisedLightButton}"/>
-        <Button x:Name="equal" Content="=" Grid.Row="4" Grid.Column="3" Height="Auto" Grid.RowSpan="2"  Style="{StaticResource MaterialDesignRaisedAccentButton}"/>
-        <Button x:Name="plus" Content="+" Grid.Row="3" Grid.Column="3" Height="Auto" Grid.RowSpan="1"  Style="{StaticResource MaterialDesignRaisedButton}"/>
-        <Button x:Name="minus" Content="-" Grid.Row="2" Grid.Column="3" Height="Auto"  Style="{StaticResource MaterialDesignRaisedButton}"/>
-        <Button x:Name="times" Content="×" Grid.Row="1" Grid.Column="3" Height="Auto"  Style="{StaticResource MaterialDesignRaisedButton}"/>
-        <Button x:Name="divide" Content="÷" Grid.Row="1" Grid.Column="2" Height="Auto"  Style="{StaticResource MaterialDesignRaisedButton}"/>
-        <Button x:Name="allClear" Content="AC" Grid.Row="1" Grid.Column="0" Height="Auto"  Style="{StaticResource MaterialDesignRaisedButton}"/>
-        <Button x:Name="clear" Content="C" Grid.Row="1" Grid.Column="1" Height="Auto"  Style="{StaticResource MaterialDesignRaisedButton}"/>
-        <TextBox x:Name="loginText" materialDesign:HintAssist.FloatingScale="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.IsFloating="True" Background="White" Padding="6,0,0,2" Grid.Row="0" Grid.ColumnSpan="4" Grid.Column="0" Text="テキストボックス（消してみて！）" materialDesign:HintAssist.Hint="ここに計算式とか表示したい"/>
+        <Button x:Name="zero" Content="0" Grid.Row="5" Grid.Column="0" Height="Auto" Grid.ColumnSpan="3"  Style="{StaticResource MaterialDesignRaisedLightButton}" Command="{Binding AddDigitCommand}" CommandParameter="0"/>
+        <!--<Button x:Name="dot" Content="" Grid.Row="5" Grid.Column="2" Height="Auto"  Style="{StaticResource MaterialDesignRaisedLightButton}" />-->
+        <Button x:Name="one" Content="1" Grid.Row="4" Grid.Column="0" Height="Auto"  Style="{StaticResource MaterialDesignRaisedLightButton}" Command="{Binding AddDigitCommand}" CommandParameter="1"/>
+        <Button x:Name="two" Content="2" Grid.Row="4" Grid.Column="1" Height="Auto"  Style="{StaticResource MaterialDesignRaisedLightButton}" Command="{Binding AddDigitCommand}" CommandParameter="2"/>
+        <Button x:Name="three" Content="3" Grid.Row="4" Grid.Column="2" Height="Auto"  Style="{StaticResource MaterialDesignRaisedLightButton}" Command="{Binding AddDigitCommand}" CommandParameter="3"/>
+        <Button x:Name="four" Content="4" Grid.Row="3" Grid.Column="0" Height="Auto"  Style="{StaticResource MaterialDesignRaisedLightButton}" Command="{Binding AddDigitCommand}" CommandParameter="4"/>
+        <Button x:Name="five" Content="5" Grid.Row="3" Grid.Column="1" Height="Auto"  Style="{StaticResource MaterialDesignRaisedLightButton}" Command="{Binding AddDigitCommand}" CommandParameter="5"/>
+        <Button x:Name="six" Content="6" Grid.Row="3" Grid.Column="2" Height="Auto"  Style="{StaticResource MaterialDesignRaisedLightButton}" Command="{Binding AddDigitCommand}" CommandParameter="6"/>
+        <Button x:Name="seven" Content="7" Grid.Row="2" Grid.Column="0" Height="Auto"  Style="{StaticResource MaterialDesignRaisedLightButton}" Command="{Binding AddDigitCommand}" CommandParameter="7"/>
+        <Button x:Name="eight" Content="8" Grid.Row="2" Grid.Column="1" Height="Auto"  Style="{StaticResource MaterialDesignRaisedLightButton}" Command="{Binding AddDigitCommand}" CommandParameter="8"/>
+        <Button x:Name="nine" Content="9" Grid.Row="2" Grid.Column="2" Height="Auto"  Style="{StaticResource MaterialDesignRaisedLightButton}" Command="{Binding AddDigitCommand}" CommandParameter="9"/>
+        <Button x:Name="equal" Content="=" Grid.Row="4" Grid.Column="3" Height="Auto" Grid.RowSpan="2"  Style="{StaticResource MaterialDesignRaisedAccentButton}" Command="{Binding OperateCommand}" CommandParameter="4"/>
+        <Button x:Name="plus" Content="+" Grid.Row="3" Grid.Column="3" Height="Auto" Grid.RowSpan="1"  Style="{StaticResource MaterialDesignRaisedButton}" Command="{Binding OperateCommand}" CommandParameter="0"/>
+        <Button x:Name="minus" Content="-" Grid.Row="2" Grid.Column="3" Height="Auto"  Style="{StaticResource MaterialDesignRaisedButton}" Command="{Binding OperateCommand}" CommandParameter="1"/>
+        <Button x:Name="times" Content="×" Grid.Row="1" Grid.Column="3" Height="Auto"  Style="{StaticResource MaterialDesignRaisedButton}" Command="{Binding OperateCommand}" CommandParameter="2"/>
+        <Button x:Name="divide" Content="÷" Grid.Row="1" Grid.Column="2" Height="Auto"  Style="{StaticResource MaterialDesignRaisedButton}" Command="{Binding OperateCommand}" CommandParameter="3"/>
+        <Button x:Name="allClear" Content="AC" Grid.Row="1" Grid.Column="0" Height="Auto"  Style="{StaticResource MaterialDesignRaisedButton}" Command="{Binding AllClearCommand}"/>
+        <Button x:Name="clear" Content="C" Grid.Row="1" Grid.Column="1" Height="Auto"  Style="{StaticResource MaterialDesignRaisedButton}" Command="{Binding ClearCommand}"/>
+        <TextBox x:Name="loginText" materialDesign:HintAssist.FloatingScale="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.IsFloating="True" Background="White" Padding="6,0,0,2" Grid.Row="0" Grid.ColumnSpan="4" Grid.Column="0" Text="{Binding Model.RightOperand}" materialDesign:HintAssist.Hint="{Binding Model.LeftOperand}" TextAlignment="Right"/>
 
     </Grid>
 
